@@ -4,8 +4,8 @@
 
 This project shows a live feed with toggleable settings that visualize the
 following:
-- 68 facial landmarks as defined in `./shape_predictor_68_face_landmarks.dat` with `dlib`
-- The convex hull of the facial landmarks
+- 68 facial landmarks as defined in `./shape_predictor_68_face_landmarks.dat` with `dlib`.
+- The convex hull of the facial landmarks.
 - The mask from the convex hull bitwise-AND'd with the webcam frame.
 - Lastly, the *Delauney*  triangles in between the landmark points.
 
