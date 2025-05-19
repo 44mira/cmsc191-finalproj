@@ -31,11 +31,17 @@ def detect_face(img):
         landmarks = predictor(processed, face)
 
         # higlight landmarks
+        landmark_points = []
         for n in range(0, 68):
             x = landmarks.part(n).x
             y = landmarks.part(n).y
+            landmark_points.append((x, y))
 
             cv2.circle(img, (x, y), 1, (0, 0, 255), -1)
+        landmark_points = np.array(landmark_points, dtype=np.int32)
+        cvx_hull = cv2.convexHull(landmark_points)
+
+        cv2.polylines(img, [cvx_hull], True, (255, 0, 255), 2)
 
     return img
 
