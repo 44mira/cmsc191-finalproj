@@ -6,9 +6,6 @@ import streamlit as st
 
 # constants  =================================================================
 
-# for closing window
-ESC = 27
-
 # 3x3 kernel for convolutions
 kernel = np.ones((3, 3), np.uint8)
 
