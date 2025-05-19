@@ -46,19 +46,41 @@ def detect_face(img):
     return img
 
 
+# sidebar configuration
+with st.sidebar:
+    st.write("# Settings")
+    enabled_feed = st.toggle("Enable live feed")
+
+    st.toggle(
+        "Show Convex hull",
+        key="enabled_cvxhull",
+        disabled=enabled_feed,
+    )
+    st.toggle(
+        "Show Landmarks",
+        key="enabled_landmarks",
+        disabled=enabled_feed,
+    )
+    st.toggle(
+        "Show Mask",
+        key="enabled_mask",
+        disabled=enabled_feed,
+    )
+    st.toggle(
+        "Show Delauney Triangles",
+        key="enabled_tri",
+        disabled=enabled_feed,
+    )
+
 # capture webcam
+DISP = st.image([])
 webcam = cv2.VideoCapture(0)
 
 # read webcam
-while True:
-    ret, frame = webcam.read()
+while enabled_feed:
+    _, frame = webcam.read()
 
-    frame = detect_face(frame)
-
-    cv2.imshow("face", frame)
-
-    if cv2.waitKey(1) == ESC:
-        break
+    frame = preprocess_face(frame)
+    DISP.image(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
 
 webcam.release()
-cv2.destroyAllWindows()
